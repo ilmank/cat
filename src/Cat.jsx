@@ -1,21 +1,41 @@
 import React from 'react';
-import {useState} from 'react';
 
 const API_URL = 'https://api.thecatapi.com/v1/images/search'
 
 const Cat = () => {
-  const[cat, setCat] = useState([]);
+  
+  let adriCat = {
+    "id": "d26", 
+    "url": "https://cdn2.thecatapi.com/images/d26.jpg", 
+    "width": 4672, 
+    "height": 3104
+  };
+
+  const catInfo = {
+    "id": "d26", 
+    "url": "https://cdn2.thecatapi.com/images/d26.jpg", 
+    "width": 4672, 
+    "height": 3104
+  };
 
   const searchCat = async () => {
     const response = await fetch(`${API_URL}`);
     const data = await response.json();
 
-    setCat(data);
-  }
+    console.log(data);
+    adriCat = data;
+    const URL = adriCat.url;
+    document.getElementById("catPic").src=URL;
+  };
 
-  // useEffect(() => {
+  // const adricatcheck = () => {
+  //   console.log(adriCat);
+  // };
+
+  // const check = () => {
   //   searchCat();
-  // }, [])
+  //   adricatcheck();
+  // }
 
   return (
     <div className="app">
@@ -23,9 +43,9 @@ const Cat = () => {
         <button onClick={() => searchCat()}> 
           Roll
         </button>
-
+        
         <div>
-          <img src={cat.url}></img>
+          <img id="catPic" src={adriCat.url}></img>
         </div>
       </div>
   );
